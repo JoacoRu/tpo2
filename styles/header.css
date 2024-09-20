@@ -1,0 +1,57 @@
+.header-mobile {
+    background-color: #FEF7FF;
+}
+
+.header-desktop {
+    display: none;
+}
+
+.navbar {
+    background-color: #FEF7FF !important;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url('../assets/burguer-menu.png') !important;
+}
+
+.header--container {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    justify-content: center;
+}
+
+li a {
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+    body {
+        background-color: #e3e3e3;
+    }
+    .header-mobile  {
+        display: none;
+    }
+
+    .header-desktop {
+        display: flex;
+        flex-direction: row;
+        background-color: #FEF7FF;
+        height: 60px;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+
+    .header--container {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+
+    li {
+        margin: 0 16px;
+    }
+}

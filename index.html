@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/home.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footer.css">
     <title>Bibliografia</title>
 </head>
+
 <body>
-    <header>
-        <ul>
+    <header class="header-mobile">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <ul class="header--container">
+                <li>Home</li>
+                <li><a href="./about_me.html">Sobre mi</a></li>
+                <li><a href="./cv.html">Curriculum</a></li>
+                <li><a href="./services.html">Servicios</a></li>
+                <li><a href="./contact.html">Contacto</a></li>
+            </ul>
+          </div>
+          <nav class="navbar navbar-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </nav>
+    </header>
+
+    <header class="header-desktop">
+        <ul class="header--container">
             <li>Home</li>
             <li><a href="./about_me.html">Sobre mi</a></li>
             <li><a href="./cv.html">Curriculum</a></li>
@@ -15,17 +39,32 @@
             <li><a href="./contact.html">Contacto</a></li>
         </ul>
     </header>
-    <section>
-        <article>
-            <h4>Joaquin Rubek</h4>
+    <section class="container">
+        <article class="image-container">
+            <img src="./assets/generic_avatar.png" alt="">
+            <div class="image-info">
+                <h4>Joaquin Rubek</h4>
+                <h5>Software developer</h5>
+            </div>
+        </article>
+        <article class="aboutme-container">
+            <h5>Sobre mi</h5>
             <p>
-                Joaquín Rubek es una persona dedicada y apasionada por sus intereses. Con una mente curiosa y un enfoque comprometido, 
-                siempre busca aprender y crecer en todo lo que hace. Su vida está marcada por el equilibrio entre sus responsabilidades y sus pasatiempos, 
-                y es conocido por ser alguien en quien se puede confiar, tanto en su vida personal como profesional. Con una visión clara de lo que quiere lograr, 
-                Joaquín trabaja incansablemente para alcanzar sus metas, siempre manteniendo un enfoque positivo y colaborativo.
+                Joaquín Rubek es una persona dedicada y apasionada por sus intereses. Con una mente curiosa y un enfoque
+                comprometido,
+                siempre busca aprender y crecer en todo lo que hace. Su vida está marcada por el equilibrio entre sus
+                responsabilidades y sus pasatiempos,
+                y es conocido por ser alguien en quien se puede confiar, tanto en su vida personal como profesional. Con
+                una visión clara de lo que quiere lograr,
+                Joaquín trabaja incansablemente para alcanzar sus metas, siempre manteniendo un enfoque positivo y
+                colaborativo.
             </p>
-            <img src="./yo.jpeg" alt="Una foto de mi persona">
         </article>
     </section>
+    <footer>
+        <p>Joaquín - Todos los derechos reservados © 2024</p>
+    </footer>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

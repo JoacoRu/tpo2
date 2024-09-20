@@ -1,0 +1,54 @@
+html, body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container {
+    min-height: 85vh;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.image-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 24px;    
+}
+
+.aboutme-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutme-container h5 {
+    font-size: 16px;
+}
+
+.aboutme-container p {
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 600px) {
+    body {
+        background-color: #e3e3e3;
+    }
+
+    .aboutme-container {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin-left: 2%;
+    }
+
+    p {
+        color: #333;
+        font-weight: 500;
+    }
+}
