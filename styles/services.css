@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.services-title {
+    font-size: 24px;
+    margin: 32px 0;
+}
+
+.services-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.services-item h3 {
+    font-size: 16px;
+}
+
+.services-item li, p {
+    font-size: 14px;
+}
