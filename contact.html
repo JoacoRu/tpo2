@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/contact.css">
+    <link rel="stylesheet" href="./styles/top-btn.css">
     <link rel="stylesheet" href="./styles/footer.css">
     <title>Contact me!</title>
 </head>
+
 <body>
     <header class="header-mobile">
         <div class="collapse" id="navbarToggleExternalContent">
@@ -18,14 +21,16 @@
                 <li><a href="./services.html">Servicios</a></li>
                 <li>Contacto</li>
             </ul>
-          </div>
-          <nav class="navbar navbar-dark">
+        </div>
+        <nav class="navbar navbar-dark">
             <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
-          </nav>
+        </nav>
     </header>
 
     <header class="header-desktop">
@@ -43,26 +48,38 @@
             <form action="/enviar_mensaje" method="POST">
                 <div class="input-container">
                     <label for="nombre">Nombre Completo</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-form">
+                        <p></p>
+                    </div>
                 </div>
-        
+
                 <div class="input-container">
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" name="email" required>
+                    <div class="error-form">
+                        <p></p>
+                    </div>
                 </div>
-        
+
                 <div class="input-container">
                     <label for="asunto">Asunto</label>
-                    <input type="text" id="asunto" name="asunto" required>
+                    <input type="text" id="subject" name="asunto" required>
+                    <div class="error-form">
+                        <p></p>
+                    </div>
                 </div>
-        
+
                 <div class="input-container">
                     <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" required rows="6"></textarea>
+                    <textarea id="message" name="mensaje" required rows="6"></textarea>
+                    <div class="error-form">
+                        <p></p>
+                    </div>
                 </div>
-        
+
                 <div class="btn-container">
-                    <button type="submit">Enviar Mensaje</button>
+                    <button type="submit" id="btn-submit">Enviar Mensaje</button>
                 </div>
             </form>
         </article>
@@ -70,7 +87,113 @@
     <footer>
         <p>Joaquín - Todos los derechos reservados © 2024</p>
     </footer>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <button id="scrollToTopBtn">
+        <img src="./assets/top_icon.png" alt="Icono para ir al header de la pagina">
+    </button>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        // Capturamos todos los campos
+        const name = document.querySelector('#name');
+        const email = document.querySelector('#email');
+        const subject = document.querySelector('#subject');
+        const message = document.querySelector('#message');
+        const btnSubmit = document.querySelector('#btn-submit');
+        const fields = [name, email, subject, message];
+
+        // Declaramos mensajes
+        const FIELD_EMPTY = 'El campo es obligaotrio';
+        const EMAIL_INVALID = 'El formato de email no es valido';
+
+        // Seteamos funciones para validaciones basicas y validaciones re-utilizables, como verificar que un campo no este vacio.
+        // Valida la longitud de un string y con doble negacion conseguimos un booleano para comparar.
+        const isEmpty = (value) => !!value?.length;
+
+        const handleStylesErrorInput = (element, message, show) => {
+            // Capturamos elemento para poder mostrar o no mostrar el elemento
+            const errorElement = element.closest('.input-container').querySelector('.error-form');
+            // Si la funcion recibe que no debe ser visible devolvemos el campo con un return para cortar el funcionamiento de la funcion
+            if (!show) {
+                element.classList.remove('error-input');
+                return errorElement.style.display = 'none';
+            }
+
+            // Si debemos mostrarlo, ponemos el contenedor en display flex y le inyectamos el mensaje al P
+            errorElement.style.display = 'flex';
+            errorElement.querySelector('p').textContent = message;
+            element.classList.add('error-input');
+        }
+
+        const validateEmpty = (fields) => {
+            let hasErrors = false;
+
+            fields.forEach((field) => {
+                if (!isEmpty(field?.value)) {
+                    handleStylesErrorInput(field, FIELD_EMPTY, true)
+                    hasErrors = true;
+                } else {
+                    handleStylesErrorInput(field, "", false)
+                }
+            });
+
+            return hasErrors;
+        }
+
+        const validate = () => {
+            let hasErrors = false;
+            const regex = /^[a-zA-Z0-9_.+\-]+[\x40][a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+            // Validamo s que todos los campos no esten vacios, ya que al ser la misma validacion para todos los campos lo podemos abstraer.
+            hasErrors = validateEmpty(fields);
+            // Validamos el email con una regex, la misma debe estar negada ya que si es true significa que el email es valido.
+            // Cualquier validacion extra que no pueda ser abstraible deberia ir en esta sentencia.
+            if (!regex.test(email.value)) {
+                handleStylesErrorInput(email, EMAIL_INVALID, true);
+                hasErrors = true;
+            }
+
+            return hasErrors;
+        }
+
+
+        const handleScrollTop = () => {
+            // Capturamos boton para ir arriba de la pagina
+            const scrollBtn = document.querySelector('#scrollToTopBtn');
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Instanciamos funcionalidad de boton scroll to top
+        handleScrollTop();
+
+        btnSubmit.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const hasErrors = validate();
+
+            if (!hasErrors) {
+                validateEmpty(fields);
+                alert('Contacto enviado')
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+
+    </script>
 </body>
+
 </html>
